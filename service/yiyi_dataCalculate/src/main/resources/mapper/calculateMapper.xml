@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiyi.service.dataCalculate.mapper.DataCalculateMapper">
+
+    <select id="getCardType" resultType="java.lang.String">
+        SELECT DISTINCT type_id FROM note_calculate WHERE user_id = #{userId} AND study_time BETWEEN  #{preDate} AND #{nowDate} ;
+    </select>
+
+    <select id="getTypeDetail" resultType="java.util.HashMap">
+        select title,id from note_card_type where id = #{l}
+    </select>
+
+    <select id="getLine" resultType="com.yiyi.service.dataCalculate.entity.Calculate">
+      SELECT * FROM note_calculate c
+        WHERE c.user_id = #{userId}
+        AND c.type_id = #{typeId}
+        AND c.`study_time` BETWEEN #{preDate} AND DATE_ADD(#{nowDate}, INTERVAL '1' DAY)
+        order BY c.`study_time` desc;
+    </select>
+    <select id="getPic" resultType="java.util.Map">
+        SELECT COUNT(1) AS num,c.`type_id`,t.`title`,t.`introduce` FROM note_calculate c
+            INNER JOIN note_card_type t ON c.`type_id` = t.`id`
+            WHERE c.user_id = #{userId}
+            AND c.`familiarity` = '2'
+            AND c.`study_time` BETWEEN #{preDate} AND #{nowDate}
+            GROUP BY c.`type_id`
+            order BY num
+    </select>
+</mapper>

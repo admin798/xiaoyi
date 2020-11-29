@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiyi.service.global.mapper.CardMapper">
+
+    <select id="searchCard" resultType="com.yiyi.service.global.entity.respon.CardSearchVo">
+      SELECT c.*,t.title as typeName,f.title as fileName FROM note_card c
+         left JOIN note_card_type t ON c.`type_id` = t.`id`
+         left JOIN note_card_file f ON c.`file_id` = f.`id`
+         ${ew.customSqlSegment}
+    </select>
+
+    <select id="getCreateCardCount" resultType="java.lang.Integer">
+        select count(1) from note_card where user_id = #{userId} and type_id = #{typeId} and date(`gmt_create`) = #{dateString}
+    </select>
+</mapper>

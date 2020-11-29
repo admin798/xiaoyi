@@ -1,0 +1,29 @@
+server:
+  port: 8290 # 服务端口
+
+spring:
+  profiles:
+    active: dev # 环境设置
+  application:
+    name: apigateway # 服务名
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos服务地址
+    gateway:
+      discovery:
+        locator:
+          enabled: true # gateway可以发现nacos中的微服务
+      routes:
+      - id: service-algorithm
+        uri: lb://algorithm
+        predicates:
+        - Path=/algorithm/**
+      - id: service-dataCalculate
+        uri: lb://dataCalculate
+        predicates:
+        - Path=/dataCalculate/**
+      - id: service-global
+        uri: lb://global
+        predicates:
+        - Path=/global/**

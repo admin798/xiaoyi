@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiyi.service.agorithm.mapper.CalculateMapper">
+
+
+    <resultMap id="recommend1" type="com.yiyi.service.agorithm.entity.CardType">
+        <id property="id" column="id"></id>
+        <result property="introduce" column="introduce"></result>
+        <result property="title" column="title"></result>
+        <result property="userId" column="user_id"></result>
+
+        <collection property="cards" ofType="Card">
+            <result property="question" column="question"></result>
+            <result property="answer1" column="answer"></result>
+            <association property="calculate" javaType="Calculate">
+                <result property="familiarity" column="familiarity"></result>
+                <result property="memoryTime" column="memory_time"></result>
+                <result property="studyTime" column="study_time"></result>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="recommend" resultMap="recommend1">
+        SELECT t.`id`,c.`user_id`,t.user_id,
+        c.`familiarity`,c.`memory_time`,c.`study_time`,
+        d.`question`,d.`answer`,
+        t.`title`,t.`introduce`
+        FROM note_card d
+        INNER JOIN note_card_type t ON d.`type_id` = t.`id`
+        INNER JOIN note_calculate c ON d.`id` = c.`card_id`
+        AND c.`study_time` between #{preDate} and #{date};
+    </select>
+
+    <resultMap id="getType1" type="com.yiyi.service.agorithm.entity.CardType">
+        <id column="id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="introduce" property="introduce"></result>
+        <collection property="cards" column="id" ofType="card"
+                    select="com.yiyi.service.agorithm.mapper.CalculateMapper.listCard">
+
+        </collection>
+    </resultMap>
+
+    <select id="getType" parameterType="String" resultMap="getType1">
+        select * from note_card_type where id = #{id}
+    </select>
+
+    <select id="listCard" resultType="com.yiyi.service.agorithm.entity.Card">
+        select * from note_card where type_id = #{id}
+    </select>
+
+    <select id="getData" resultType="com.yiyi.service.agorithm.entity.Data">
+        SELECT * FROM note_data WHERE note_title LIKE #{title} ORDER BY  RAND() LIMIT 10;
+    </select>
+</mapper>

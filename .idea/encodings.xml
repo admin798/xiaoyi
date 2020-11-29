@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/base/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/util/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_agorithm" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_agorithm/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_dataCalculate" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_dataCalculate/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_getway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_getway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_global" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_global/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_images" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/yiyi_images/src/main/java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

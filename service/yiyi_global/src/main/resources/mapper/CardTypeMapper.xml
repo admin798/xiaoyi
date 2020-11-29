@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiyi.service.global.mapper.CardTypeMapper">
+
+    <resultMap id="showStudy1" type="com.yiyi.service.global.entity.respon.CardTypeStudyVo">
+        <id column="id" property="id"></id>
+        <result column="study_time" property="studyTime"></result>
+        <result column="next_study_time" property="nextStudyTime"></result>
+        <result column="gmt_create" property="gmtCreate"></result>
+        <result column="title" property="title"></result>
+        <association property="createCardCount" column="{id=id,createTime=next_study_time}" javaType="integer" select="com.yiyi.service.global.mapper.CardTypeMapper.getCardCreateCount">
+        </association>
+        <association property="studyCard" column="{id=id,studyTime=next_study_time}" javaType="integer" select="com.yiyi.service.global.mapper.CardTypeMapper.getCardStudyCount">
+        </association>
+        <collection property="cards" ofType="com.yiyi.service.global.entity.Card"></collection>
+    </resultMap>
+
+
+    <select id="showStudy" resultMap="showStudy1">
+        SELECT t.`title`,t.`study_time`,c.`next_study_time`,c.`gmt_create`,t.`id`
+        FROM note_card_type t INNER JOIN note_card c ON c.`type_id` = t.`id`
+        ${ew.customSqlSegment};
+    </select>
+    <select id="getCardCreateCount" resultType="java.lang.Integer">
+        select count(1) from note_card where type_id = #{id} and date(`gmt_create`) = #{createTime}
+    </select>
+
+    <select id="getCardStudyCount" resultType="java.lang.Integer">
+        select count(1) from note_card where type_id = #{id} and next_study_time = #{studyTime}
+    </select>
+    <select id="getCardReviewCount" resultType="java.lang.Integer">
+        select count(1) from note_card where type_id = #{id} and DATE_ADD(pre_study_time, INTERVAL '4' DAY) = #{reviewTime}
+    </select>
+</mapper>
