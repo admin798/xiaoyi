@@ -16,7 +16,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: yiyi147258369
+    password: ***
     url: jdbc:mysql://47.112.252.178:3306/note_test?serverTimezone=GMT%2B8&characterEncoding=utf-8
   redis:
     host: 47.112.252.178
@@ -28,7 +28,7 @@ spring:
         max-wait: -1    #最大阻塞等待时间，负值表示没限制，默认-1
         max-idle: 8     #最大空闲连接，默认8
         min-idle: 0     #最小空闲连接，默认0
-    password: yiyi147258369
+    password: ***
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
